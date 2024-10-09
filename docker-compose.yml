@@ -1,0 +1,20 @@
+version: "3.9"
+    
+services:
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    environment:
+       POSTGRES_DB: DB
+       POSTGRES_USER: USER
+       POSTGRES_PASSWORD: PASS
+    restart: "no"
+    volumes:
+      - ./init.sql://docker-entrypoint-initdb.d/init.sql
+    ports:
+        - "5432:5432"
+    deploy:
+        resources:
+            limits:
+                cpus: "1"
+                memory: "500MB"
